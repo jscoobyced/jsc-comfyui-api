@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jsc-ts-api-app
+  namespace: jsc-ns
+  labels:
+    app: jsc-ts-api-app
+    component: jsc-ts-api-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jsc-ts-api-app
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: jsc-ts-api-app
+        tier: frontend
+    spec:
+      containers:
+        - name: jsc-ts-api
+          image: jscdroiddev/jsc-ts-api:latest
+          imagePullPolicy: Always
+          env:
+            - name: TZ
+              value: "Asia/Bangkok"
+          ports:
+            - containerPort: 80
+              name: jsc-ts-api-app
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+            requests:
+              cpu: "500m"
+              memory: "128Mi"

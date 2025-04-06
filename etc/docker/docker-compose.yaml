@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  node:
+    image: node:lts-slim
+    user: "${JSC_UID}:${JSC_GID}"
+    volumes:
+      - "${PWD}/:/app/"
+
+  production:
+    build:
+      context: .
+      dockerfile: ./etc/docker/Dockerfile
+    ports:
+      - 8080:80
