@@ -26,5 +26,5 @@ export const createImageRoute = (
   }
   const workflowInput: WorkflowInput = request.body as WorkflowInput;
   log('Received create image request:', JSON.stringify(workflowInput));
-  response.send('');
+  response.status(200).send('');
 };
