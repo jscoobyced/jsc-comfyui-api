@@ -8,6 +8,6 @@ export const defaultRoute = (
   response: ExpressResponse,
 ) => {
   void request;
-  const message = process.env.APP_NAME ?? 'JSC API TypeScript';
+  const message = process.env.APP_NAME ?? 'JSC ComfyUI API';
   response.send(message);
 };

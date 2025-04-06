@@ -11,6 +11,6 @@ describe('Default Route', () => {
       send: jest.fn(),
     } as unknown as ExpressResponse;
     defaultRoute(request, response);
-    expect(response.send).toHaveBeenCalledWith('JSC API TypeScript');
+    expect(response.send).toHaveBeenCalledWith('JSC ComfyUI API');
   });
 });

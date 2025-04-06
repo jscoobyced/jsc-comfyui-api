@@ -1,8 +1,8 @@
-[![codecov](https://codecov.io/gh/jscoobyced/jsc-api-ts/graph/badge.svg?token=43ZQ0RLXLX)](https://codecov.io/gh/jscoobyced/jsc-api-ts)
+[![codecov](https://codecov.io/gh/jscoobyced/jsc-comfyui-api/graph/badge.svg?token=DOB3A527DJ)](https://codecov.io/gh/jscoobyced/jsc-comfyui-api)
 
-## Simple Typescript API application with Express
+## Simple API for ComfyUI
 
-This is a template project to quickly create a Typescript application with Express.
+Simplify the automation of a ComfyUI workflow.
 
 # Quick Start
 
