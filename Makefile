@@ -25,4 +25,4 @@ build: .dep
 	./etc/bin/build.sh
 
 deploy:
-	kubectl apply -k etc/k8s
+	kubectl apply -k ./etc/k8s

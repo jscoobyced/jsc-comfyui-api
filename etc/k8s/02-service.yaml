@@ -9,7 +9,7 @@ spec:
   type: ClusterIP
   ports:
     - port: 8889
-      targetPort: 80
+      targetPort: 3000
   selector:
     app: jsc-ts-api-app
     tier: frontend

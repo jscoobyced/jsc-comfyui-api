@@ -9,7 +9,5 @@ then
     WITH_COVERAGE=" --coverage"
 fi
 
-pushd code
 echo "Running tests"
 $DOCKER_COMPOSE run --rm node yarn --cwd /app/ test${WITH_COVERAGE}
-popd

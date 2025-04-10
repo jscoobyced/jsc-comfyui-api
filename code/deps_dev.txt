@@ -3,7 +3,7 @@
 @types/jest
 @types/node
 @types/supertest
-eslint@9.14.0
+eslint
 jest
 nodemon
 prettier

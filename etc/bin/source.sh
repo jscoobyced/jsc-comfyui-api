@@ -13,4 +13,4 @@ fi
 export JSC_UID=$(id -u)
 export JSC_GID=$(id -g)
 
-DOCKER_COMPOSE="docker-compose -f ../etc/docker/docker-compose.yaml"
+DOCKER_COMPOSE="docker-compose -f ./etc/docker/docker-compose.yaml"

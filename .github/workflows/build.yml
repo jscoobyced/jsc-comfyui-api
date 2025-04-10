@@ -8,9 +8,9 @@ on:
     types: [published]
 
 env:
-  IMAGE_NAME: jsc-ts-api
-  IMAGE_TITLE: Simple Typescript API application with Express
-  IMAGE_DESCRIPTION: This is the image for Simple Typescript API application with Express.
+  IMAGE_NAME: jsc-comfyui-api
+  IMAGE_TITLE: JSC ComfyUI API
+  IMAGE_DESCRIPTION: Run a ComfyUI workfload to generate an image.
   SRC_PATH: code/
   DOCKERFILE_PATH: etc/docker/Dockerfile
 

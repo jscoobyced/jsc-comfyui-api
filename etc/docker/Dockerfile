@@ -1,4 +1,4 @@
-FROM node:22-alpine AS builder
+FROM node:slim AS builder
 
 WORKDIR /app
 COPY code/ ./
@@ -9,8 +9,12 @@ ARG APP_VERSION ${APP_VERSION}
 RUN yarn --cwd code install
 RUN yarn --cwd code build
 
-FROM nginx:alpine
+FROM node:slim
 
-COPY --from=builder /app/dist /usr/share/nginx/html
-COPY etc/docker/nginx.conf /etc/nginx/
-EXPOSE 80
+WORKDIR /app
+RUN mkdir -p node_modules
+COPY --from=builder /app/dist /app
+COPY --from=builder /app/node_modules /app/node_modules
+EXPOSE 3000
+
+CMD ["node", "/app/index.js"]

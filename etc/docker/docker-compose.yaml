@@ -4,11 +4,11 @@ services:
     image: node:lts-slim
     user: "${JSC_UID}:${JSC_GID}"
     volumes:
-      - "${PWD}/:/app/"
+      - "${PWD}/code/:/app/"
 
   production:
     build:
-      context: .
-      dockerfile: ./etc/docker/Dockerfile
+      context: ../..
+      dockerfile: etc/docker/Dockerfile
     ports:
-      - 8080:80
+      - 3000:3000
