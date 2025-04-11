@@ -4,3 +4,7 @@ export enum Routes {
   CREATE_IMAGE = `/image/create`,
   RETRIEVE_IMAGE = `/image/get/:id`,
 }
+
+export enum ComfyUIEndpoints {
+  PROMPT = 'prompt',
+}

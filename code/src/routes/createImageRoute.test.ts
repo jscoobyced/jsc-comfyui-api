@@ -4,21 +4,31 @@ import {
 } from 'express';
 import { createImageRoute } from './createImageRoute';
 
-jest.mock('../services/log');
+jest.mock('../services/utils/log');
+
+jest.mock('../services/image/createImage', () => ({
+  createImage: jest.fn(),
+}));
 
 describe('createImageRoute', () => {
-  it('should return 400 if input is not in correct format', () => {
+  const mockJson = jest.fn();
+  const mockStatus = jest.fn().mockImplementation(() => ({
+    json: mockJson,
+  }));
+
+  beforeEach(() => {
+    mockJson.mockClear();
+    mockStatus.mockClear();
+  });
+
+  it('should return 400 if input is not in correct format', async () => {
     const request = {
       body: {},
     } as ExpressRequest;
-    const mockJson = jest.fn();
-    const mockStatus = jest.fn().mockImplementation(() => ({
-      json: mockJson,
-    }));
     const response = {
       status: mockStatus,
     } as unknown as ExpressResponse;
-    createImageRoute(request, response);
+    await createImageRoute(request, response);
     expect(mockStatus).toHaveBeenCalledWith(400);
     expect(mockJson).toHaveBeenCalledWith({
       error:
@@ -26,7 +36,7 @@ describe('createImageRoute', () => {
     });
   });
 
-  it('should return 200 if input is not in correct format', () => {
+  it('should return 200 if input is not in correct format', async () => {
     const request = {
       body: {
         prompt: 'A beautiful landscape',
@@ -37,16 +47,11 @@ describe('createImageRoute', () => {
       },
     } as unknown as ExpressRequest;
 
-    const mockSend = jest.fn();
-
-    const mockStatus = jest.fn().mockImplementation(() => ({
-      send: mockSend,
-    }));
     const response = {
       status: mockStatus,
     } as unknown as ExpressResponse;
-    createImageRoute(request, response);
+    await createImageRoute(request, response);
     expect(mockStatus).toHaveBeenCalledWith(200);
-    expect(mockSend).toHaveBeenCalledTimes(1);
+    expect(mockJson).toHaveBeenCalledTimes(1);
   });
 });

@@ -3,6 +3,7 @@
     "target": "ESNext",
     "module": "commonjs",
     "esModuleInterop": true,
+    "resolveJsonModule": true,
 
     // Linting
     "strict": true,

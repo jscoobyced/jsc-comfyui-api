@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { main } from './main';
 
-jest.mock('./services/log');
+jest.mock('./services/utils/log');
 
 describe('main', () => {
   it('should start the server', async () => {

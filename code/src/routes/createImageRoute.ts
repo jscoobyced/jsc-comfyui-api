@@ -3,9 +3,10 @@ import {
   Response as ExpressResponse,
 } from 'express';
 import { WorkflowInput } from '../models/workflow';
-import { log } from '../services/log';
+import { createImage } from '../services/image/createImage';
+import { log } from '../services/utils/log';
 
-export const createImageRoute = (
+export const createImageRoute = async (
   request: ExpressRequest,
   response: ExpressResponse,
 ) => {
@@ -25,6 +26,7 @@ export const createImageRoute = (
     return;
   }
   const workflowInput: WorkflowInput = request.body as WorkflowInput;
-  log('Received create image request:', JSON.stringify(workflowInput));
-  response.status(200).send('');
+  log('Received create image request');
+  const result = await createImage(workflowInput);
+  response.status(200).json({ result });
 };

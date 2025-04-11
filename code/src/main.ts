@@ -1,6 +1,6 @@
 import express from 'express';
 import router from './routes/router';
-import { log } from './services/log';
+import { log } from './services/utils/log';
 
 export const main = (port: number) => {
   const app = express();
