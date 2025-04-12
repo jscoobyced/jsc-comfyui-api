@@ -16,7 +16,7 @@ export const buildPrompt = (workflowInput: WorkflowInput): WorkflowRequest => {
 
 const setPromptText = (workflow: WorkflowData, promptText: string) => {
   const promptIndex = workflow.indexes.prompt;
-  const nodes = workflow.prompt[promptIndex].inputs;
-  const newNode = { ...nodes, text: promptText };
+  const currentNode = workflow.prompt[promptIndex].inputs;
+  const newNode = { ...currentNode, text: promptText };
   workflow.prompt[promptIndex].inputs = newNode;
 };

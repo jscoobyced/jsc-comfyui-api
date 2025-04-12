@@ -10,7 +10,7 @@ export const createImage = async (workflowInput: WorkflowInput) => {
   }
   const prompt = buildPrompt(workflowInput);
   const createImageUrl = `${comfyuiUrl}/${ComfyUIEndpoints.PROMPT}`;
-  log('Making request to ComfyUI to generate an image...', createImageUrl);
+  log('Making request to ComfyUI to generate an image at', createImageUrl);
   const result = await fetch(createImageUrl, {
     method: 'POST',
     headers: {

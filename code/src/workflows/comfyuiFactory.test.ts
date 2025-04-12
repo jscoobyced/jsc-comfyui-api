@@ -1,6 +1,6 @@
 import { WorkflowNames } from '../models/workflow';
 import { getWorkflowData } from './comfyuiFactory';
-import * as expected from './stable-diffusion/workflow.json';
+import expected from './stable-diffusion/workflow.json';
 
 describe('comfyuiFactory', () => {
   it('should return the correct workflow data', () => {

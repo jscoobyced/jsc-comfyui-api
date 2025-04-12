@@ -25,18 +25,18 @@ spec:
           env:
             - name: TZ
               value: "Asia/Bangkok"
+            - name: PORT
+              value: "3000"
             - name: NODE_ENV
               value: "production"
             - name: APP_NAME
               value: "Generate image using ComfyUI"
+            - name: APP_DESCRIPTION
+              value: "Simple API to run a ComfyUI workflow and generate an image."
             - name: APP_VERSION
               value: "v0.0.1"
             - name: COMFYUI_URL
               value: "http://comfyui-server:8188/"
-            - name: APP_DESCRIPTION
-              value: "Simple API to run a ComfyUI workflow and generate an image."
-            - name: PORT
-              value: "3000"
           ports:
             - containerPort: 3000
               name: jsc-ts-api-app
