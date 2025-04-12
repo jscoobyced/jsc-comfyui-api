@@ -1,4 +1,5 @@
 import { WorkflowInput, WorkflowNames } from '../../models/workflow';
+import { StableDiffusionNodes } from '../../workflows/stable-diffusion/nodes';
 import { buildPrompt } from './buildPrompt';
 
 const testWorkflow = {
@@ -12,29 +13,51 @@ const testWorkflow = {
       title: 'CLIP Text Encode (Prompt)',
     },
   },
-  '11': {
+  '71': {
     inputs: {
-      clip_name1: 'clip_g.safetensors',
-      clip_name2: 'clip_l.safetensors',
-      clip_name3: 't5xxl_fp16.safetensors',
+      text: 'negative prompt text here',
+      clip: ['11', 0],
     },
-    class_type: 'TripleCLIPLoader',
+    class_type: 'CLIPTextEncode',
     _meta: {
-      title: 'TripleCLIPLoader',
+      title: 'CLIP Text Encode (Negative Prompt)',
+    },
+  },
+  '135': {
+    inputs: {
+      width: 1344,
+      height: 1344,
+      batch_size: 1,
+    },
+    class_type: 'EmptySD3LatentImage',
+    _meta: {
+      title: 'EmptySD3LatentImage',
+    },
+  },
+  '271': {
+    inputs: {
+      seed: 0,
+      steps: 40,
+      cfg: 3,
+      sampler_name: 'euler',
+      scheduler: 'normal',
+      denoise: 1,
+      model: ['13', 0],
+      positive: ['6', 0],
+      negative: ['69', 0],
+      latent_image: ['135', 0],
     },
   },
 };
 
 const expectedPrompt = 'A beautiful flower in a vase on a kitchen table';
-const expectedIndex = 6;
+const expectedIndex = StableDiffusionNodes;
 
 jest.mock('../../workflows/comfyuiFactory', () => {
   return {
     getWorkflowData: jest.fn((name: WorkflowNames) => ({
       prompt: testWorkflow,
-      indexes: {
-        prompt: expectedIndex,
-      },
+      indexes: expectedIndex,
       name,
     })),
   };
@@ -51,9 +74,41 @@ describe('buildPrompt', () => {
     };
     const result = buildPrompt(workflowInput);
     expect(result.prompt.default).toBeUndefined();
-    expect(result.prompt[expectedIndex.toString()].inputs).toEqual({
+    expect(result.prompt[expectedIndex.prompt.value.toString()].inputs).toEqual(
+      {
+        clip: ['11', 0],
+        text: expectedPrompt,
+      },
+    );
+    expect(
+      result.prompt[expectedIndex.negativePrompt.value.toString()].inputs,
+    ).toEqual({
       clip: ['11', 0],
-      text: expectedPrompt,
+      text: 'negative prompt text here',
+    });
+    expect(result.prompt[expectedIndex.width.value.toString()].inputs).toEqual({
+      width: 512,
+      height: 512,
+      batch_size: 1,
+    });
+    expect(result.prompt[expectedIndex.height.value.toString()].inputs).toEqual(
+      {
+        width: 512,
+        height: 512,
+        batch_size: 1,
+      },
+    );
+    expect(result.prompt[expectedIndex.seed.value.toString()].inputs).toEqual({
+      seed: 12345,
+      steps: 40,
+      cfg: 3,
+      sampler_name: 'euler',
+      scheduler: 'normal',
+      denoise: 1,
+      model: ['13', 0],
+      positive: ['6', 0],
+      negative: ['69', 0],
+      latent_image: ['135', 0],
     });
   });
 });

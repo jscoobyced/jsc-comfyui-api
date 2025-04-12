@@ -1,8 +1,10 @@
 import {
   WorkflowData,
+  WorkflowIndex,
   WorkflowInput,
   WorkflowNames,
   WorkflowRequest,
+  WorkflowType,
 } from '../../models/workflow';
 import { getWorkflowData } from '../../workflows/comfyuiFactory';
 
@@ -10,13 +12,36 @@ export const buildPrompt = (workflowInput: WorkflowInput): WorkflowRequest => {
   const workflow: WorkflowData = getWorkflowData(
     WorkflowNames.STABLE_DIFFUSION,
   );
-  setPromptText(workflow, workflowInput.prompt);
+  updatePromptValue(
+    workflow.prompt,
+    workflow.indexes.prompt,
+    workflowInput.prompt,
+  );
+  updatePromptValue(
+    workflow.prompt,
+    workflow.indexes.negativePrompt,
+    workflowInput.negativePrompt,
+  );
+  updatePromptValue(workflow.prompt, workflow.indexes.seed, workflowInput.seed);
+  updatePromptValue(
+    workflow.prompt,
+    workflow.indexes.height,
+    workflowInput.height,
+  );
+  updatePromptValue(
+    workflow.prompt,
+    workflow.indexes.width,
+    workflowInput.width,
+  );
   return { prompt: workflow.prompt };
 };
 
-const setPromptText = (workflow: WorkflowData, promptText: string) => {
-  const promptIndex = workflow.indexes.prompt;
-  const currentNode = workflow.prompt[promptIndex].inputs;
-  const newNode = { ...currentNode, text: promptText };
-  workflow.prompt[promptIndex].inputs = newNode;
+const updatePromptValue = (
+  prompt: WorkflowType,
+  index: WorkflowIndex,
+  value: string | number | undefined,
+) => {
+  if (!value) return;
+  const currentNode = prompt[index.value.toString()].inputs;
+  currentNode[index.key] = value;
 };

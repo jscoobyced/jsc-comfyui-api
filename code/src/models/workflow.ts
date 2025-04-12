@@ -6,12 +6,17 @@ export interface WorkflowInput {
   height?: number;
 }
 
+export interface WorkflowIndex {
+  key: string;
+  value: number;
+}
+
 export interface WorkflowIndexes {
-  prompt: number;
-  negativePrompt: number;
-  seed: number;
-  width: number;
-  height: number;
+  prompt: WorkflowIndex;
+  negativePrompt: WorkflowIndex;
+  seed: WorkflowIndex;
+  width: WorkflowIndex;
+  height: WorkflowIndex;
 }
 
 export type WorkflowType = Record<string, ClassType>;
@@ -25,7 +30,7 @@ export interface Meta {
   title: string;
 }
 
-export type InputsType = Record<string, object | string>;
+export type InputsType = Record<string, object | string | number>;
 
 export interface ClassType {
   inputs: InputsType;
