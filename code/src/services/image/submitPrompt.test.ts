@@ -1,5 +1,5 @@
 import { WorkflowInput } from '../../models/workflow';
-import { createImage } from './createImage';
+import { submitPrompt } from './submitPrompt';
 
 jest.mock('../prompt/buildPrompt');
 jest.mock('../utils/log');
@@ -9,7 +9,7 @@ jest.mock('../../models/routes', () => ({
   },
 }));
 
-describe('image/createImage', () => {
+describe('image/submitPrompt', () => {
   const workflowInput: WorkflowInput = {
     prompt: 'A beautiful landscape with mountains and a river',
     negativePrompt: '',
@@ -20,7 +20,7 @@ describe('image/createImage', () => {
 
   it('should throw an error if COMFYUI_URL is not defined', async () => {
     delete process.env.COMFYUI_URL;
-    await expect(createImage(workflowInput)).rejects.toThrow(
+    await expect(submitPrompt(workflowInput)).rejects.toThrow(
       'COMFYUI_URL is not defined',
     );
   });
@@ -36,7 +36,7 @@ describe('image/createImage', () => {
       ) as jest.Mock,
     );
 
-    await expect(createImage(workflowInput)).rejects.toThrow(
+    await expect(submitPrompt(workflowInput)).rejects.toThrow(
       'Failed to create image: error',
     );
   });
@@ -53,7 +53,7 @@ describe('image/createImage', () => {
       ) as jest.Mock,
     );
 
-    const result = await createImage(workflowInput);
+    const result = await submitPrompt(workflowInput);
     expect(result).toEqual(expected);
   });
 });

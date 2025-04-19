@@ -6,8 +6,8 @@ import { createImageRoute } from './createImageRoute';
 
 jest.mock('../services/utils/log');
 
-jest.mock('../services/image/createImage', () => ({
-  createImage: jest.fn(),
+jest.mock('../services/image/submitPrompt', () => ({
+  submitPrompt: jest.fn(),
 }));
 
 describe('createImageRoute', () => {

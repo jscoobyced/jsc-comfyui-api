@@ -3,7 +3,7 @@ import {
   Response as ExpressResponse,
 } from 'express';
 import { WorkflowInput } from '../models/workflow';
-import { createImage } from '../services/image/createImage';
+import { submitPrompt } from '../services/image/submitPrompt';
 import { log } from '../services/utils/log';
 
 export const createImageRoute = async (
@@ -27,6 +27,6 @@ export const createImageRoute = async (
   }
   const workflowInput: WorkflowInput = request.body as WorkflowInput;
   log('Received create image request');
-  const result = await createImage(workflowInput);
+  const result = await submitPrompt(workflowInput);
   response.status(200).json({ result });
 };

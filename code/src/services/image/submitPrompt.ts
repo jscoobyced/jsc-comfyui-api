@@ -3,7 +3,7 @@ import { WorkflowInput, WorkflowResponse } from '../../models/workflow';
 import { buildPrompt } from '../prompt/buildPrompt';
 import { log } from '../utils/log';
 
-export const createImage = async (workflowInput: WorkflowInput) => {
+export const submitPrompt = async (workflowInput: WorkflowInput) => {
   const comfyuiUrl = process.env.COMFYUI_URL ?? undefined;
   if (!comfyuiUrl) {
     throw new Error('COMFYUI_URL is not defined');
