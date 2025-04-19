@@ -1,4 +1,1 @@
-export interface ImageResponse {
-  ready: boolean;
-  image?: ArrayBuffer;
-}
+export type ImageResponse = boolean | ArrayBuffer;

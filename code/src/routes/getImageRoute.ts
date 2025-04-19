@@ -26,10 +26,14 @@ export const getImageRoute = async (
   // Get image from ComfyUI
   const getImageResponse = await getImage(imageUUID);
   // Image not ready
-  if (!getImageResponse.ready) {
+  if (!getImageResponse) {
     const message = `Image '${imageUUID}' is not yet ready.`;
     response.status(202).json({ message });
     return;
   }
-  response.status(200).json(getImageResponse);
+  const imageBuffer = getImageResponse as ArrayBuffer;
+  response
+    .status(200)
+    .header('Content-Type', 'image/png')
+    .send(Buffer.from(imageBuffer));
 };

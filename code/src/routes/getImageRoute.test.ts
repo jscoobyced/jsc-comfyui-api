@@ -13,13 +13,18 @@ describe('retreiveImageRoute', () => {
     getImage: getImageSpy,
   }));
   const mockJson = jest.fn();
+  const mockSend = jest.fn();
   const mockStatus = jest.fn().mockImplementation(() => ({
     json: mockJson,
+    header: jest.fn().mockImplementation(() => ({
+      send: mockSend,
+    })),
   }));
 
   beforeEach(() => {
     mockJson.mockClear();
     mockStatus.mockClear();
+    mockSend.mockClear();
   });
 
   it('should return 400 if there is no "id" parameter', async () => {
@@ -53,9 +58,7 @@ describe('retreiveImageRoute', () => {
   });
 
   it('should return 202 if image is not ready', async () => {
-    getImageSpy.mockResolvedValue({
-      ready: false,
-    });
+    getImageSpy.mockResolvedValue(false);
     const request = {
       params: {
         id: '366d21bc-faf8-4e5e-ac20-88468e25e6eb',
@@ -71,9 +74,7 @@ describe('retreiveImageRoute', () => {
   });
 
   it('should return 200 if input is not in correct format and image is ready', async () => {
-    getImageSpy.mockResolvedValue({
-      ready: true,
-    });
+    getImageSpy.mockResolvedValue(new ArrayBuffer());
 
     const request = {
       params: {
@@ -86,6 +87,6 @@ describe('retreiveImageRoute', () => {
     } as unknown as ExpressResponse;
     await getImageRoute(request, response);
     expect(mockStatus).toHaveBeenCalledWith(200);
-    expect(mockJson).toHaveBeenCalledTimes(1);
+    expect(mockSend).toHaveBeenCalledTimes(1);
   });
 });

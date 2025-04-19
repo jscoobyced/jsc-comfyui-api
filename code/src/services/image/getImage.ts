@@ -1,6 +1,7 @@
 import { ImageResponse } from '../../models/image';
 import { QueueData } from '../../models/queue';
 import { log } from '../utils/log';
+import { downloadImage } from './downloadImage';
 import { getHistory } from './getHistory';
 import { getImageUrl } from './getImageUrl';
 import { getQueue } from './getQueue';
@@ -27,14 +28,16 @@ export const getImage = async (imageUUID: string): Promise<ImageResponse> => {
     checkQueue(imageUUID, queue.queue_running)
   ) {
     log(`Image '${imageUUID}' is still in the queue, waiting...`);
-    return { ready: false };
+    return false;
   }
   const historyResult = await getHistory(comfyuiUrl, imageUUID);
   const imageUrl = getImageUrl(historyResult, imageUUID);
   if (!imageUrl) {
     log(`No image found for UUID ${imageUUID}`);
-    return { ready: false };
+    return false;
   }
-  const image: ArrayBuffer = new ArrayBuffer();
-  return { ready: true, image };
+  const fullImageUrl = `${comfyuiUrl}${imageUrl}`;
+  log(`Downloading image from ${fullImageUrl}...`);
+  const imageBuffer: ArrayBuffer = await downloadImage(fullImageUrl);
+  return imageBuffer;
 };
