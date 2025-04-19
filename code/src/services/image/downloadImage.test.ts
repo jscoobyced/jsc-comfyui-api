@@ -13,7 +13,7 @@ describe('downloadImage', () => {
         }),
       ) as jest.Mock,
     );
-    expect(async () => await downloadImage(imageUrl)).rejects.toThrow(
+    await expect(downloadImage(imageUrl)).rejects.toThrow(
       'Error downloading image: 404',
     );
   });

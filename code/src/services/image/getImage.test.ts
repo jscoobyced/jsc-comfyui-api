@@ -46,7 +46,7 @@ describe('getImage', () => {
     downloadImageSpy.mockResolvedValue(new ArrayBuffer());
     const result = await getImage(sampleImageUuid);
     expect(result).toEqual(
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+       
       expect.any(ArrayBuffer),
     );
   });
