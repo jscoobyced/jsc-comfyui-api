@@ -2,12 +2,12 @@ import express from 'express';
 import { Routes } from '../models/routes';
 import { createImageRoute } from './createImageRoute';
 import { defaultRoute } from './defaultRoute';
-import { retreiveImageRoute } from './retreiveImageRoute';
+import { getImageRoute } from './getImageRoute';
 
 const router = express.Router();
 
 router.get(Routes.HOME, defaultRoute);
-router.post(Routes.CREATE_IMAGE, createImageRoute);
-router.get(Routes.RETREIVE_IMAGE, retreiveImageRoute);
+router.post(Routes.IMAGE_CREATE, createImageRoute);
+router.get(Routes.IMAGE_GET, getImageRoute);
 
 export default router;

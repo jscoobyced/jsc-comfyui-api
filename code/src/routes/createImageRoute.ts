@@ -28,5 +28,5 @@ export const createImageRoute = async (
   const workflowInput: WorkflowInput = request.body as WorkflowInput;
   log('Received create image request');
   const result = await submitPrompt(workflowInput);
-  response.status(200).json({ result });
+  response.status(200).json(result);
 };

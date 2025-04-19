@@ -3,14 +3,14 @@ import {
   Response as ExpressResponse,
 } from 'express';
 import * as getImage from '../services/image/getImage';
-import { retreiveImageRoute } from './retreiveImageRoute';
+import { getImageRoute } from './getImageRoute';
 
 jest.mock('../services/utils/log');
-const mockGetImage = jest.spyOn(getImage, 'getImage');
+const getImageSpy = jest.spyOn(getImage, 'getImage');
 
 describe('retreiveImageRoute', () => {
   jest.mock('../services/image/getImage', () => ({
-    getImage: mockGetImage,
+    getImage: getImageSpy,
   }));
   const mockJson = jest.fn();
   const mockStatus = jest.fn().mockImplementation(() => ({
@@ -29,7 +29,7 @@ describe('retreiveImageRoute', () => {
     const response = {
       status: mockStatus,
     } as unknown as ExpressResponse;
-    await retreiveImageRoute(request, response);
+    await getImageRoute(request, response);
     expect(mockStatus).toHaveBeenCalledWith(400);
     expect(mockJson).toHaveBeenCalledWith({
       error: 'Invalid UUID format: undefined',
@@ -45,7 +45,7 @@ describe('retreiveImageRoute', () => {
     const response = {
       status: mockStatus,
     } as unknown as ExpressResponse;
-    await retreiveImageRoute(request, response);
+    await getImageRoute(request, response);
     expect(mockStatus).toHaveBeenCalledWith(400);
     expect(mockJson).toHaveBeenCalledWith({
       error: 'Invalid UUID format: invalid-uuid',
@@ -53,11 +53,8 @@ describe('retreiveImageRoute', () => {
   });
 
   it('should return 202 if image is not ready', async () => {
-    mockGetImage.mockImplementation(async (imageUuid: string) => {
-      void imageUuid;
-      return {
-        ready: false,
-      };
+    getImageSpy.mockResolvedValue({
+      ready: false,
     });
     const request = {
       params: {
@@ -68,17 +65,14 @@ describe('retreiveImageRoute', () => {
     const response = {
       status: mockStatus,
     } as unknown as ExpressResponse;
-    await retreiveImageRoute(request, response);
+    await getImageRoute(request, response);
     expect(mockStatus).toHaveBeenCalledWith(202);
     expect(mockJson).toHaveBeenCalledTimes(1);
   });
 
   it('should return 200 if input is not in correct format and image is ready', async () => {
-    mockGetImage.mockImplementation(async (imageUuid: string) => {
-      void imageUuid;
-      return {
-        ready: true,
-      };
+    getImageSpy.mockResolvedValue({
+      ready: true,
     });
 
     const request = {
@@ -90,7 +84,7 @@ describe('retreiveImageRoute', () => {
     const response = {
       status: mockStatus,
     } as unknown as ExpressResponse;
-    await retreiveImageRoute(request, response);
+    await getImageRoute(request, response);
     expect(mockStatus).toHaveBeenCalledWith(200);
     expect(mockJson).toHaveBeenCalledTimes(1);
   });
