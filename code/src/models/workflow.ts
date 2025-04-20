@@ -50,5 +50,6 @@ export interface WorkflowResponse {
 
 export enum WorkflowNames {
   STABLE_DIFFUSION = 'stable-diffusion',
+  FLUX = 'flux',
   OTHER = 'other',
 }

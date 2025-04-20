@@ -9,9 +9,7 @@ import {
 import { getWorkflowData } from '../../workflows/comfyuiFactory';
 
 export const buildPrompt = (workflowInput: WorkflowInput): WorkflowRequest => {
-  const workflow: WorkflowData = getWorkflowData(
-    WorkflowNames.STABLE_DIFFUSION,
-  );
+  const workflow: WorkflowData = getWorkflowData(WorkflowNames.FLUX);
   updatePromptValue(
     workflow.prompt,
     workflow.indexes.prompt,

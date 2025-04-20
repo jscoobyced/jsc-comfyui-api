@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jsc-ts-api-app
+  name: jsc-cfyui-api-app
   namespace: jsc-ns
   labels:
-    app: jsc-ts-api-app
-    component: jsc-ts-api-app
+    app: jsc-cfyui-api-app
+    component: jsc-cfyui-api-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: jsc-ts-api-app
+      app: jsc-cfyui-api-app
       tier: frontend
   template:
     metadata:
       labels:
-        app: jsc-ts-api-app
+        app: jsc-cfyui-api-app
         tier: frontend
     spec:
       containers:
-        - name: jsc-ts-api
-          image: jscdroiddev/jsc-ts-api:latest
+        - name: jsc-comfyui-api
+          image: jscdroiddev/jsc-comfyui-api:latest
           imagePullPolicy: Always
           env:
             - name: TZ
@@ -34,12 +34,12 @@ spec:
             - name: APP_DESCRIPTION
               value: "Simple API to run a ComfyUI workflow and generate an image."
             - name: APP_VERSION
-              value: "v0.0.1"
+              value: "v0.1.0"
             - name: COMFYUI_URL
-              value: "http://comfyui-server:8188/"
+              value: "http://comfyui-server:8188"
           ports:
             - containerPort: 3000
-              name: jsc-ts-api-app
+              name: jsc-cfyui-api-app
           resources:
             limits:
               cpu: "500m"

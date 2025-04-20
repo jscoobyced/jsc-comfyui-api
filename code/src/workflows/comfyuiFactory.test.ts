@@ -1,11 +1,17 @@
 import { WorkflowNames } from '../models/workflow';
 import { getWorkflowData } from './comfyuiFactory';
-import expected from './stable-diffusion/workflow.json';
+import fluxExpected from './flux/workflow.json';
+import sdExpected from './stable-diffusion/workflow.json';
 
 describe('comfyuiFactory', () => {
-  it('should return the correct workflow data', () => {
+  it('should return the correct SD workflow data', () => {
     const actual = getWorkflowData(WorkflowNames.STABLE_DIFFUSION).prompt;
-    expect(actual).toEqual(expected);
+    expect(actual).toEqual(sdExpected);
+  });
+
+  it('should return the correct Flux workflow data', () => {
+    const actual = getWorkflowData(WorkflowNames.FLUX).prompt;
+    expect(actual).toEqual(fluxExpected);
   });
 
   it('should throw an error for unknown workflow names', () => {
