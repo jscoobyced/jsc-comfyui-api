@@ -1,6 +1,6 @@
 import { WorkflowIndexes } from '../../models/workflow';
 
-export const FluxNodes: WorkflowIndexes = {
+export const FluxSchnellNodes: WorkflowIndexes = {
   prompt: {
     key: 'text',
     value: 6,

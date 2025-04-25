@@ -1,6 +1,7 @@
 import { WorkflowNames } from '../models/workflow';
 import { getWorkflowData } from './comfyuiFactory';
-import fluxExpected from './flux/workflow.json';
+import fluxDevExpected from './flux-dev/workflow.json';
+import fluxSchnellExpected from './flux-schnell/workflow.json';
 import sdExpected from './stable-diffusion/workflow.json';
 
 describe('comfyuiFactory', () => {
@@ -9,9 +10,14 @@ describe('comfyuiFactory', () => {
     expect(actual).toEqual(sdExpected);
   });
 
-  it('should return the correct Flux workflow data', () => {
-    const actual = getWorkflowData(WorkflowNames.FLUX).prompt;
-    expect(actual).toEqual(fluxExpected);
+  it('should return the correct Flux Devworkflow data', () => {
+    const actual = getWorkflowData(WorkflowNames.FLUX_DEV).prompt;
+    expect(actual).toEqual(fluxDevExpected);
+  });
+
+  it('should return the correct Flux Schnell workflow data', () => {
+    const actual = getWorkflowData(WorkflowNames.FLUX_SCHNELL).prompt;
+    expect(actual).toEqual(fluxSchnellExpected);
   });
 
   it('should throw an error for unknown workflow names', () => {

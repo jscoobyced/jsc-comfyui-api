@@ -2,7 +2,7 @@
   "3": {
     "inputs": {
       "seed": 807415900713725,
-      "steps": 20,
+      "steps": 3,
       "cfg": 1,
       "sampler_name": "euler",
       "scheduler": "normal",
@@ -19,7 +19,7 @@
   },
   "4": {
     "inputs": {
-      "ckpt_name": "flux1-dev-fp8.safetensors"
+      "ckpt_name": "flux1-schnell-fp8.safetensors"
     },
     "class_type": "CheckpointLoaderSimple",
     "_meta": {
