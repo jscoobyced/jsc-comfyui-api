@@ -15,11 +15,13 @@ export const buildPrompt = (workflowInput: WorkflowInput): WorkflowRequest => {
     workflow.indexes.prompt,
     workflowInput.prompt,
   );
-  updatePromptValue(
-    workflow.prompt,
-    workflow.indexes.negativePrompt,
-    workflowInput.negativePrompt,
-  );
+  if (workflow.indexes.negativePrompt) {
+    updatePromptValue(
+      workflow.prompt,
+      workflow.indexes.negativePrompt,
+      workflowInput.negativePrompt,
+    );
+  }
   updatePromptValue(workflow.prompt, workflow.indexes.seed, workflowInput.seed);
   updatePromptValue(
     workflow.prompt,

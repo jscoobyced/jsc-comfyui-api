@@ -13,7 +13,7 @@ export interface WorkflowIndex {
 
 export interface WorkflowIndexes {
   prompt: WorkflowIndex;
-  negativePrompt: WorkflowIndex;
+  negativePrompt?: WorkflowIndex;
   seed: WorkflowIndex;
   width: WorkflowIndex;
   height: WorkflowIndex;

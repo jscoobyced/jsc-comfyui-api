@@ -80,9 +80,10 @@ describe('buildPrompt', () => {
         text: expectedPrompt,
       },
     );
-    expect(
-      result.prompt[expectedIndex.negativePrompt.value.toString()].inputs,
-    ).toEqual({
+    const negativePrompt = (
+      expectedIndex.negativePrompt ?? { value: '' }
+    ).value.toString();
+    expect(result.prompt[negativePrompt].inputs).toEqual({
       clip: ['11', 0],
       text: 'negative prompt text here',
     });
