@@ -3,7 +3,7 @@ import { StableDiffusionNodes } from '../../workflows/stable-diffusion/nodes';
 import { buildPrompt } from './buildPrompt';
 
 const testWorkflow = {
-  '6': {
+  '16': {
     inputs: {
       text: 'prompt text here',
       clip: ['11', 0],
@@ -13,7 +13,7 @@ const testWorkflow = {
       title: 'CLIP Text Encode (Prompt)',
     },
   },
-  '71': {
+  '40': {
     inputs: {
       text: 'negative prompt text here',
       clip: ['11', 0],
@@ -23,7 +23,7 @@ const testWorkflow = {
       title: 'CLIP Text Encode (Negative Prompt)',
     },
   },
-  '135': {
+  '53': {
     inputs: {
       width: 1344,
       height: 1344,
@@ -34,7 +34,7 @@ const testWorkflow = {
       title: 'EmptySD3LatentImage',
     },
   },
-  '271': {
+  '3': {
     inputs: {
       seed: 0,
       steps: 40,
