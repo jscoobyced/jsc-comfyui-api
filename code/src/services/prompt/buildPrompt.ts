@@ -7,9 +7,13 @@ import {
   WorkflowType,
 } from '../../models/workflow';
 import { getWorkflowData } from '../../workflows/comfyuiFactory';
+import { getModel } from './getWorkflow';
 
 export const buildPrompt = (workflowInput: WorkflowInput): WorkflowRequest => {
-  const workflow: WorkflowData = getWorkflowData(WorkflowNames.FLUX_SCHNELL);
+  const model = getModel(
+    workflowInput.model ?? WorkflowNames.FLUX_SCHNELL.valueOf(),
+  );
+  const workflow: WorkflowData = getWorkflowData(model);
   updatePromptValue(
     workflow.prompt,
     workflow.indexes.prompt,

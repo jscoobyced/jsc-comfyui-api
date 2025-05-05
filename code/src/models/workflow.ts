@@ -4,6 +4,7 @@ export interface WorkflowInput {
   seed?: number;
   width?: number;
   height?: number;
+  model?: string;
 }
 
 export interface WorkflowIndex {
