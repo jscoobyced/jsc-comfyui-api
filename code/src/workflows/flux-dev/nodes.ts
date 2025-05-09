@@ -5,13 +5,9 @@ export const FluxDevNodes: WorkflowIndexes = {
     key: 'text',
     value: 6,
   },
-  negativePrompt: {
-    key: 'text',
-    value: 7,
-  },
   seed: {
     key: 'seed',
-    value: 3,
+    value: 25,
   },
   width: {
     key: 'width',
