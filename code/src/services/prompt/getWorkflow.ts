@@ -10,6 +10,8 @@ export const getModel = (model: string): WorkflowNames => {
       return WorkflowNames.STABLE_DIFFUSION;
     case WorkflowNames.WAN_I2V.valueOf():
       return WorkflowNames.WAN_I2V;
+    case WorkflowNames.WAN_T2V.valueOf():
+      return WorkflowNames.WAN_T2V;
     default:
       return WorkflowNames.FLUX_SCHNELL;
   }

@@ -18,6 +18,9 @@ describe('getWorkflow', () => {
   it('should return the correct workflow for WAN_I2V', () => {
     expect(getModel(WorkflowNames.WAN_I2V)).toBe(WorkflowNames.WAN_I2V);
   });
+  it('should return the correct workflow for WAN_T2V', () => {
+    expect(getModel(WorkflowNames.WAN_T2V)).toBe(WorkflowNames.WAN_T2V);
+  });
   it('should default to FLUX_SCHNELL if an unknown model is provided', () => {
     expect(getModel('unknown')).toBe(WorkflowNames.FLUX_SCHNELL);
   });

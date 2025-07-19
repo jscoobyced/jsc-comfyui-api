@@ -54,5 +54,6 @@ export enum WorkflowNames {
   FLUX_DEV = 'flux-dev',
   FLUX_SCHNELL = 'flux-schnell',
   WAN_I2V = 'wan-i2v',
+  WAN_T2V = 'wan-t2v',
   OTHER = 'other',
 }
