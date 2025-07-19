@@ -8,5 +8,5 @@ export const getImageRoute = async (
   request: ExpressRequest,
   response: ExpressResponse,
 ) => {
-  getAssetRoute(request, response, 'image/png');
+  await getAssetRoute(request, response, 'image/png');
 };

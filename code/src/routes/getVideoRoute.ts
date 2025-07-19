@@ -8,5 +8,5 @@ export const getVideoRoute = async (
   request: ExpressRequest,
   response: ExpressResponse,
 ) => {
-  getAssetRoute(request, response, 'video/webm');
+  await getAssetRoute(request, response, 'video/webm');
 };
