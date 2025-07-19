@@ -3,6 +3,7 @@ export enum Routes {
   IMAGE = '/image',
   IMAGE_CREATE = `/image/create`,
   IMAGE_STATUS = '/image/status/:id',
+  VIDEO_STATUS = '/video/status/:id',
   IMAGE_GET = `/image/get/:id`,
   VIDEO = '/video',
   VIDEO_GET = `/video/get/:id`,
