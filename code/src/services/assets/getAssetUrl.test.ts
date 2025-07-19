@@ -1,11 +1,11 @@
 import { sampleHistoryData, sampleImageUuid } from '../../models/history';
-import { getImageUrl } from './getImageUrl';
+import { getAssetUrl } from './getAssetUrl';
 
 jest.mock('../utils/log');
 
 describe('getImageUrl', () => {
   it('should return the correct image URL when historyData contains valid data', () => {
-    const result = getImageUrl(
+    const result = getAssetUrl(
       sampleHistoryData,
       '86ee4289-0b56-42ca-8f52-d6ed180ed99f',
     );
@@ -16,7 +16,7 @@ describe('getImageUrl', () => {
     const historyData = sampleHistoryData;
     historyData[sampleImageUuid].outputs['123'].images[0].subFolder = 'folder';
     historyData[sampleImageUuid].outputs['123'].images[0].type = '';
-    const result = getImageUrl(
+    const result = getAssetUrl(
       historyData,
       '86ee4289-0b56-42ca-8f52-d6ed180ed99f',
     );
@@ -26,7 +26,7 @@ describe('getImageUrl', () => {
   });
 
   it('should return no image URL when historyData contains invlaid UUID', () => {
-    const result = getImageUrl(
+    const result = getAssetUrl(
       sampleHistoryData,
       '86ee4289-0b56-42ca-8f52-d6ed180ed99e',
     );

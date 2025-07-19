@@ -1,17 +1,17 @@
 import { HistoryData, HistoryRecord } from '../../models/history';
 import { log } from '../utils/log';
 
-export const getImageUrl = (
+export const getAssetUrl = (
   historyData: HistoryData,
-  imageUuid: string,
+  assetUuid: string,
 ): string => {
   if (Object.keys(historyData).length === 0) {
     return '';
   }
   const validHistoryData = historyData as Record<string, HistoryRecord>;
   for (const responseImageUuid in validHistoryData) {
-    if (imageUuid === responseImageUuid) {
-      const data: HistoryRecord = validHistoryData[imageUuid];
+    if (assetUuid === responseImageUuid) {
+      const data: HistoryRecord = validHistoryData[assetUuid];
       const output = data.outputs;
       for (const key in output) {
         const images = output[key].images;
@@ -22,7 +22,7 @@ export const getImageUrl = (
             : '';
           const type = image.type ? encodeURIComponent(image.type) : '';
           const path = `/api/view?filename=${filename}&subfolder=${subfolder}&type=${type}`;
-          log(`Found image ${path} for UUID ${imageUuid}`);
+          log(`Found asset ${path} for UUID ${assetUuid}`);
           return path;
         }
       }

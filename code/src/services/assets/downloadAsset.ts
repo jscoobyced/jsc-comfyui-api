@@ -1,8 +1,8 @@
 import { log } from '../utils/log';
 
-export const downloadImage = async (imageUrl: string): Promise<ArrayBuffer> => {
+export const downloadAsset = async (assetUrl: string): Promise<ArrayBuffer> => {
   try {
-    const response = await fetch(imageUrl);
+    const response = await fetch(assetUrl);
     if (!response.ok) {
       throw new Error(`Error downloading image: ${response.status.toString()}`);
     }

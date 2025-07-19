@@ -2,7 +2,7 @@ import { StatusResponse } from '../../models/image';
 import { QueueData } from '../../models/queue';
 import { log } from '../utils/log';
 import { getHistory } from './getHistory';
-import { getImageUrl } from './getImageUrl';
+import { getAssetUrl } from './getAssetUrl';
 import { getQueue } from './getQueue';
 
 const checkQueue = (imageUUID: string, queueData: QueueData[]) => {
@@ -30,8 +30,8 @@ export const getStatus = async (imageUUID: string): Promise<StatusResponse> => {
     return { ready: false };
   }
   const historyResult = await getHistory(comfyuiUrl, imageUUID);
-  const imageUrl = getImageUrl(historyResult, imageUUID);
-  if (!imageUrl) {
+  const assetUrl = getAssetUrl(historyResult, imageUUID);
+  if (!assetUrl) {
     const error = `No image found for UUID ${imageUUID}`;
     log(error);
     return { ready: false, error };

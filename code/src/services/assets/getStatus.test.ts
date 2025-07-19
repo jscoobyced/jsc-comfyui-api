@@ -1,7 +1,7 @@
 import { sampleHistoryData, sampleImageUuid } from '../../models/history';
 import { QueueData } from '../../models/queue';
 import * as getHistory from './getHistory';
-import * as getImageUrl from './getImageUrl';
+import * as getAssetUrl from './getAssetUrl';
 import * as getQueue from './getQueue';
 import { getStatus } from './getStatus';
 
@@ -9,7 +9,7 @@ jest.mock('../utils/log');
 
 const getQueueSpy = jest.spyOn(getQueue, 'getQueue');
 const getHistorySpy = jest.spyOn(getHistory, 'getHistory');
-const getImageUrlSpy = jest.spyOn(getImageUrl, 'getImageUrl');
+const getAssetUrlSpy = jest.spyOn(getAssetUrl, 'getAssetUrl');
 
 const imageQueueData: QueueData = [1, sampleImageUuid];
 const notReady = { ready: false };
@@ -44,7 +44,7 @@ describe('getStatus', () => {
     });
 
     getHistorySpy.mockResolvedValue(sampleHistoryData);
-    getImageUrlSpy.mockReturnValue('/valid/url');
+    getAssetUrlSpy.mockReturnValue('/valid/url');
     const result = await getStatus(sampleImageUuid);
     expect(result).toEqual({ ready: true });
   });

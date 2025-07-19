@@ -2,12 +2,13 @@ import {
   Request as ExpressRequest,
   Response as ExpressResponse,
 } from 'express';
-import { getStatus } from '../services/assets/getStatus';
+import { getAsset } from '../services/assets/getAsset';
 import { log } from '../services/utils/log';
 
-export const getStatusRoute = async (
+export const getAssetRoute = async (
   request: ExpressRequest,
   response: ExpressResponse,
+  contentType: string,
 ) => {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   const imageUUID = request.params?.id;
@@ -20,15 +21,20 @@ export const getStatusRoute = async (
   ) {
     const error = `Invalid UUID format: ${imageUUID}`;
     log(error);
-    response.status(400).json({ ready: false, error });
+    response.status(400).json({ error });
     return;
   }
   // Get image from ComfyUI
-  const getStatusResponse = await getStatus(imageUUID);
-  // Image not readygetStatus
-  if (!getStatusResponse.ready) {
-    response.status(202).json({ ready: false });
+  const getImageResponse = await getAsset(imageUUID);
+  // Image not ready
+  if (!getImageResponse) {
+    const message = `Image '${imageUUID}' is not yet ready.`;
+    response.status(202).json({ message });
     return;
   }
-  response.status(200).json(getStatusResponse);
+  const imageBuffer = getImageResponse as ArrayBuffer;
+  response
+    .status(200)
+    .header('Content-Type', contentType)
+    .send(Buffer.from(imageBuffer));
 };

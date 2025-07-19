@@ -4,9 +4,9 @@ import {
 } from 'express';
 import { getAssetRoute } from './getAssetRoute';
 
-export const getImageRoute = async (
+export const getVideoRoute = async (
   request: ExpressRequest,
   response: ExpressResponse,
 ) => {
-  getAssetRoute(request, response, 'image/png');
+  getAssetRoute(request, response, 'video/webm');
 };

@@ -1,4 +1,4 @@
-import { downloadImage } from './downloadImage';
+import { downloadAsset } from './downloadAsset';
 
 jest.mock('../utils/log');
 
@@ -13,7 +13,7 @@ describe('downloadImage', () => {
         }),
       ) as jest.Mock,
     );
-    await expect(downloadImage(imageUrl)).rejects.toThrow(
+    await expect(downloadAsset(imageUrl)).rejects.toThrow(
       'Error downloading image: 404',
     );
   });
@@ -30,6 +30,6 @@ describe('downloadImage', () => {
       ) as jest.Mock,
     );
 
-    expect(await downloadImage(imageUrl)).toEqual(expectedArrayBuffer);
+    expect(await downloadAsset(imageUrl)).toEqual(expectedArrayBuffer);
   });
 });

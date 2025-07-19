@@ -3,10 +3,10 @@ import {
   Response as ExpressResponse,
 } from 'express';
 import { WorkflowInput } from '../models/workflow';
-import { submitPrompt } from '../services/image/submitPrompt';
+import { submitPrompt } from '../services/assets/submitPrompt';
 import { log } from '../services/utils/log';
 
-export const createImageRoute = async (
+export const createAssetRoute = async (
   request: ExpressRequest,
   response: ExpressResponse,
 ) => {

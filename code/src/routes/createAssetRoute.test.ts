@@ -2,15 +2,15 @@ import {
   Request as ExpressRequest,
   Response as ExpressResponse,
 } from 'express';
-import { createImageRoute } from './createImageRoute';
+import { createAssetRoute } from './createAssetRoute';
 
 jest.mock('../services/utils/log');
 
-jest.mock('../services/image/submitPrompt', () => ({
+jest.mock('../services/assets/submitPrompt', () => ({
   submitPrompt: jest.fn(),
 }));
 
-describe('createImageRoute', () => {
+describe('createAssetRoute', () => {
   const mockJson = jest.fn();
   const mockStatus = jest.fn().mockImplementation(() => ({
     json: mockJson,
@@ -28,7 +28,7 @@ describe('createImageRoute', () => {
     const response = {
       status: mockStatus,
     } as unknown as ExpressResponse;
-    await createImageRoute(request, response);
+    await createAssetRoute(request, response);
     expect(mockStatus).toHaveBeenCalledWith(400);
     expect(mockJson).toHaveBeenCalledWith({
       error:
@@ -50,7 +50,7 @@ describe('createImageRoute', () => {
     const response = {
       status: mockStatus,
     } as unknown as ExpressResponse;
-    await createImageRoute(request, response);
+    await createAssetRoute(request, response);
     expect(mockStatus).toHaveBeenCalledWith(200);
     expect(mockJson).toHaveBeenCalledTimes(1);
   });
