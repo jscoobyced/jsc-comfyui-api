@@ -3,6 +3,8 @@ import { FluxDevNodes } from './flux-dev/nodes';
 import fluxDevWorkflow from './flux-dev/workflow.json';
 import { FluxSchnellNodes } from './flux-schnell/nodes';
 import fluxSchnellWorkflow from './flux-schnell/workflow.json';
+import { WanI2VNodes } from './wan-i2v/nodes';
+import wanI2VWorkflow from './wan-i2v/workflow.json';
 import { StableDiffusionNodes } from './stable-diffusion/nodes';
 import sdWorkflow from './stable-diffusion/workflow.json';
 
@@ -21,6 +23,10 @@ export const getWorkflowData = (name: WorkflowNames): WorkflowData => {
     case WorkflowNames.FLUX_SCHNELL:
       workflow = fluxSchnellWorkflow as unknown as WorkflowType;
       indexes = FluxSchnellNodes;
+      break;
+    case WorkflowNames.WAN_I2V:
+      workflow = wanI2VWorkflow as unknown as WorkflowType;
+      indexes = WanI2VNodes;
       break;
     default:
       throw new Error(`Unknown workflow name: ${name}`);

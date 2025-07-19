@@ -3,6 +3,7 @@ import { getWorkflowData } from './comfyuiFactory';
 import fluxDevExpected from './flux-dev/workflow.json';
 import fluxSchnellExpected from './flux-schnell/workflow.json';
 import sdExpected from './stable-diffusion/workflow.json';
+import wanI2VExpected from './wan-i2v/workflow.json';
 
 describe('comfyuiFactory', () => {
   it('should return the correct SD workflow data', () => {
@@ -18,6 +19,11 @@ describe('comfyuiFactory', () => {
   it('should return the correct Flux Schnell workflow data', () => {
     const actual = getWorkflowData(WorkflowNames.FLUX_SCHNELL).prompt;
     expect(actual).toEqual(fluxSchnellExpected);
+  });
+
+  it('should return the correct Wan I2V workflow data', () => {
+    const actual = getWorkflowData(WorkflowNames.WAN_I2V).prompt;
+    expect(actual).toEqual(wanI2VExpected);
   });
 
   it('should throw an error for unknown workflow names', () => {
