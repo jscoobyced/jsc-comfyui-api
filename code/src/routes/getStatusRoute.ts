@@ -4,10 +4,11 @@ import {
 } from 'express';
 import { getStatus } from '../services/assets/getStatus';
 import { log } from '../services/utils/log';
+import { AssetType } from '../models/asset';
 
 export const getStatusRoute = async (
   request: ExpressRequest,
-  response: ExpressResponse,
+  response: ExpressResponse
 ) => {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   const imageUUID = request.params?.id;
@@ -24,7 +25,7 @@ export const getStatusRoute = async (
     return;
   }
   // Get image from ComfyUI
-  const getStatusResponse = await getStatus(imageUUID);
+  const getStatusResponse = await getStatus(imageUUID, AssetType.IMAGE);
   // Image not readygetStatus
   if (!getStatusResponse.ready) {
     response.status(202).json({ ready: false });

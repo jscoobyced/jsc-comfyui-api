@@ -1,6 +1,7 @@
 import { getVideoRoute } from './getVideoRoute';
 import { getAssetRoute } from './getAssetRoute';
 import type { Request, Response } from 'express';
+import { AssetType } from '../models/asset';
 
 jest.mock('./getAssetRoute');
 
@@ -16,6 +17,6 @@ describe('getVideoRoute', () => {
 
     it('should call getAssetRoute with request, response, and video/webm', async () => {
     await getVideoRoute(req as Request, res as Response);
-    expect(getAssetRoute).toHaveBeenCalledWith(req, res, 'video/webm');
+    expect(getAssetRoute).toHaveBeenCalledWith(req, res, AssetType.VIDEO);
   });
 });

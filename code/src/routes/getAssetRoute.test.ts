@@ -4,6 +4,7 @@ import {
 } from 'express';
 import * as getAsset from '../services/assets/getAsset';
 import { getAssetRoute } from './getAssetRoute';
+import { AssetType } from '../models/asset';
 
 jest.mock('../services/utils/log');
 const getAssetSpy = jest.spyOn(getAsset, 'getAsset');
@@ -34,7 +35,7 @@ describe('retreiveImageRoute', () => {
     const response = {
       status: mockStatus,
     } as unknown as ExpressResponse;
-    await getAssetRoute(request, response, 'image/png' as string);
+    await getAssetRoute(request, response, AssetType.IMAGE);
     expect(mockStatus).toHaveBeenCalledWith(400);
     expect(mockJson).toHaveBeenCalledWith({
       error: 'Invalid UUID format: undefined',
@@ -50,7 +51,7 @@ describe('retreiveImageRoute', () => {
     const response = {
       status: mockStatus,
     } as unknown as ExpressResponse;
-    await getAssetRoute(request, response, 'image/png' as string);
+    await getAssetRoute(request, response, AssetType.IMAGE);
     expect(mockStatus).toHaveBeenCalledWith(400);
     expect(mockJson).toHaveBeenCalledWith({
       error: 'Invalid UUID format: invalid-uuid',
@@ -68,7 +69,7 @@ describe('retreiveImageRoute', () => {
     const response = {
       status: mockStatus,
     } as unknown as ExpressResponse;
-    await getAssetRoute(request, response, 'image/png' as string);
+    await getAssetRoute(request, response, AssetType.IMAGE);
     expect(mockStatus).toHaveBeenCalledWith(202);
     expect(mockJson).toHaveBeenCalledTimes(1);
   });
@@ -85,7 +86,7 @@ describe('retreiveImageRoute', () => {
     const response = {
       status: mockStatus,
     } as unknown as ExpressResponse;
-    await getAssetRoute(request, response, 'image/png' as string);
+    await getAssetRoute(request, response, AssetType.IMAGE);
     expect(mockStatus).toHaveBeenCalledWith(200);
     expect(mockSend).toHaveBeenCalledTimes(1);
   });

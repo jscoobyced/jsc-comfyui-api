@@ -1,8 +1,9 @@
-import { sampleHistoryData, sampleImageUuid } from '../../models/history';
+import { sampleHistoryData, sampleAssetUuid } from '../../models/history';
 import * as downloadAsset from './downloadAsset';
 import * as getHistory from './getHistory';
 import { getAsset } from './getAsset';
 import * as getAssetUrl from './getAssetUrl';
+import { AssetType } from '../../models/asset';
 
 jest.mock('../utils/log');
 
@@ -13,7 +14,7 @@ const downloadAssetSpy = jest.spyOn(downloadAsset, 'downloadAsset');
 describe('getImage', () => {
   it('should throw an error if COMFYUI_URL is not defined', async () => {
     delete process.env.COMFYUI_URL;
-    await expect(getAsset('123456789')).rejects.toThrow(
+    await expect(getAsset('123456789', AssetType.IMAGE)).rejects.toThrow(
       'COMFYUI_URL is not defined',
     );
   });
@@ -21,7 +22,7 @@ describe('getImage', () => {
   it('should return not ready if there is no image in the history', async () => {
     process.env.COMFYUI_URL = 'http://localhost';
     getHistorySpy.mockResolvedValue({});
-    const result = await getAsset(sampleImageUuid);
+    const result = await getAsset(sampleAssetUuid, AssetType.IMAGE);
     expect(result).toEqual(false);
   });
 
@@ -31,7 +32,7 @@ describe('getImage', () => {
     getHistorySpy.mockResolvedValue(sampleHistoryData);
     getAssetUrlSpy.mockReturnValue('/valid/url');
     downloadAssetSpy.mockResolvedValue(new ArrayBuffer());
-    const result = await getAsset(sampleImageUuid);
+    const result = await getAsset(sampleAssetUuid, AssetType.IMAGE);
     expect(result).toEqual(expect.any(ArrayBuffer));
   });
 });

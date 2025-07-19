@@ -1,11 +1,15 @@
-export interface HistoryImage {
+export interface HistoryOutput {
   filename: string;
   subFolder: string;
   type: string;
 }
 
 export interface HistoryImages {
-  images: HistoryImage[];
+  images: HistoryOutput[];
+}
+
+export interface HistoryVideos {
+  gifs: HistoryOutput[];
 }
 
 export interface HistoryStatus {
@@ -25,14 +29,14 @@ export type HistoryMeta = Record<string, HistoryMetaData>;
 
 export interface HistoryRecord {
   prompt: object;
-  outputs: Record<string, HistoryImages>;
+  outputs: Record<string, HistoryImages | HistoryVideos>;
   status: HistoryStatus;
   meta: HistoryMeta;
 }
 
 export type HistoryData = Record<string, HistoryRecord>;
 
-export const sampleImageUuid = '86ee4289-0b56-42ca-8f52-d6ed180ed99f';
+export const sampleAssetUuid = '86ee4289-0b56-42ca-8f52-d6ed180ed99f';
 export const sampleHistoryData: HistoryData = {
   '86ee4289-0b56-42ca-8f52-d6ed180ed99f': {
     outputs: {
@@ -40,6 +44,13 @@ export const sampleHistoryData: HistoryData = {
         images: [
           {
             filename: 'filename.png',
+            subFolder: '',
+            type: 'temp',
+          },
+        ],
+        gifs: [
+          {
+            filename: 'filename.mp4',
             subFolder: '',
             type: 'temp',
           },

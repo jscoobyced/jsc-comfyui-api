@@ -4,37 +4,38 @@ import {
 } from 'express';
 import { getAsset } from '../services/assets/getAsset';
 import { log } from '../services/utils/log';
+import { AssetType } from '../models/asset';
 
 export const getAssetRoute = async (
   request: ExpressRequest,
   response: ExpressResponse,
-  contentType: string,
+  assetType: AssetType,
 ) => {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  const imageUUID = request.params?.id;
+  const assetUUID = request.params?.id;
   // Check params is a UUID format
   if (
-    !imageUUID ||
+    !assetUUID ||
     !/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(
-      imageUUID,
+      assetUUID,
     )
   ) {
-    const error = `Invalid UUID format: ${imageUUID}`;
+    const error = `Invalid UUID format: ${assetUUID}`;
     log(error);
     response.status(400).json({ error });
     return;
   }
   // Get image from ComfyUI
-  const getImageResponse = await getAsset(imageUUID);
+  const getAssetResponse = await getAsset(assetUUID, assetType);
   // Image not ready
-  if (!getImageResponse) {
-    const message = `Image '${imageUUID}' is not yet ready.`;
+  if (!getAssetResponse) {
+    const message = `Asset '${assetUUID}' is not yet ready.`;
     response.status(202).json({ message });
     return;
   }
-  const imageBuffer = getImageResponse as ArrayBuffer;
+  const assetBuffer = getAssetResponse as ArrayBuffer;
   response
     .status(200)
-    .header('Content-Type', contentType)
-    .send(Buffer.from(imageBuffer));
+    .header('Content-Type', assetType.valueOf())
+    .send(Buffer.from(assetBuffer));
 };
