@@ -12,7 +12,9 @@ export const getAssetRoute = async (
   assetType: AssetType,
 ) => {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  const assetUUID = request.params?.id;
+  const requestId = request.params?.id;
+  // Trim the extension
+  const assetUUID = requestId.split('.')[0];
   // Check params is a UUID format
   if (
     !assetUUID ||
