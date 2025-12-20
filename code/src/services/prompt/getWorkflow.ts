@@ -12,6 +12,8 @@ export const getModel = (model: string): WorkflowNames => {
       return WorkflowNames.WAN_I2V;
     case WorkflowNames.WAN_T2V.valueOf():
       return WorkflowNames.WAN_T2V;
+    case WorkflowNames.WOMAN_DRAGON.valueOf():
+      return WorkflowNames.WOMAN_DRAGON;
     default:
       return WorkflowNames.FLUX_SCHNELL;
   }

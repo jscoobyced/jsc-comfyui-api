@@ -3,12 +3,14 @@ import { FluxDevNodes } from './flux-dev/nodes';
 import fluxDevWorkflow from './flux-dev/workflow.json';
 import { FluxSchnellNodes } from './flux-schnell/nodes';
 import fluxSchnellWorkflow from './flux-schnell/workflow.json';
-import { WanI2VNodes } from './wan-i2v/nodes';
-import wanI2VWorkflow from './wan-i2v/workflow.json';
 import { StableDiffusionNodes } from './stable-diffusion/nodes';
 import sdWorkflow from './stable-diffusion/workflow.json';
+import { WanI2VNodes } from './wan-i2v/nodes';
+import wanI2VWorkflow from './wan-i2v/workflow.json';
 import { WanT2VNodes } from './wan-t2v/nodes';
 import wanT2VWorkflow from './wan-t2v/workflow.json';
+import { WomanDragonNodes } from './woman-dragon/nodes';
+import womanDragonWorkflow from './woman-dragon/workflow.json';
 
 export const getWorkflowData = (name: WorkflowNames): WorkflowData => {
   let workflow;
@@ -33,6 +35,10 @@ export const getWorkflowData = (name: WorkflowNames): WorkflowData => {
     case WorkflowNames.WAN_T2V:
       workflow = wanT2VWorkflow as unknown as WorkflowType;
       indexes = WanT2VNodes;
+      break;
+    case WorkflowNames.WOMAN_DRAGON:
+      workflow = womanDragonWorkflow as unknown as WorkflowType;
+      indexes = WomanDragonNodes;
       break;
     default:
       throw new Error(`Unknown workflow name: ${name}`);
