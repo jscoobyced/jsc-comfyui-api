@@ -6,7 +6,7 @@ export const FluxSchnellNodes: WorkflowIndexes = {
     value: 6,
   },
   seed: {
-    key: 'seed',
+    key: 'noise_seed',
     value: 25,
   },
   width: {
