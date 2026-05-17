@@ -1,4 +1,4 @@
-FROM node:slim AS builder
+FROM node:25-alpine AS builder
 
 WORKDIR /app
 COPY code/ ./
@@ -9,7 +9,7 @@ ARG APP_VERSION ${APP_VERSION}
 RUN yarn --cwd code install
 RUN yarn --cwd code build
 
-FROM node:slim
+FROM node:25-alpine
 
 WORKDIR /app
 RUN mkdir -p node_modules
