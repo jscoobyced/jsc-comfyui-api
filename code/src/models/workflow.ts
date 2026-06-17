@@ -56,5 +56,6 @@ export enum WorkflowNames {
   WAN_I2V = 'wan-i2v',
   WAN_T2V = 'wan-t2v',
   WOMAN_DRAGON = 'woman-dragon',
+  BARBIE_FLUX = 'barbie-flux',
   OTHER = 'other',
 }

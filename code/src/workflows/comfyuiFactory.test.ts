@@ -1,4 +1,5 @@
 import { WorkflowNames } from '../models/workflow';
+import barbieFluxExpected from './barbie-flux/workflow.json';
 import { getWorkflowData } from './comfyuiFactory';
 import fluxDevExpected from './flux-dev/workflow.json';
 import fluxSchnellExpected from './flux-schnell/workflow.json';
@@ -36,6 +37,11 @@ describe('comfyuiFactory', () => {
   it('should return the correct Woman Dragon workflow data', () => {
     const actual = getWorkflowData(WorkflowNames.WOMAN_DRAGON).prompt;
     expect(actual).toEqual(womanDragonExpected);
+  });
+
+  it('should return the correct Barbie Flux workflow data', () => {
+    const actual = getWorkflowData(WorkflowNames.BARBIE_FLUX).prompt;
+    expect(actual).toEqual(barbieFluxExpected);
   });
 
   it('should throw an error for unknown workflow names', () => {

@@ -1,4 +1,6 @@
 import { WorkflowData, WorkflowNames, WorkflowType } from '../models/workflow';
+import { BarbieFluxNodes } from './barbie-flux/nodes';
+import barbieFluxWorkflow from './barbie-flux/workflow.json';
 import { FluxDevNodes } from './flux-dev/nodes';
 import fluxDevWorkflow from './flux-dev/workflow.json';
 import { FluxSchnellNodes } from './flux-schnell/nodes';
@@ -39,6 +41,10 @@ export const getWorkflowData = (name: WorkflowNames): WorkflowData => {
     case WorkflowNames.WOMAN_DRAGON:
       workflow = womanDragonWorkflow as unknown as WorkflowType;
       indexes = WomanDragonNodes;
+      break;
+    case WorkflowNames.BARBIE_FLUX:
+      workflow = barbieFluxWorkflow as unknown as WorkflowType;
+      indexes = BarbieFluxNodes;
       break;
     default:
       throw new Error(`Unknown workflow name: ${name}`);
